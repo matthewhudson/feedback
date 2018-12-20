@@ -23,11 +23,16 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
+          <title>UserMirror · Feedback</title>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
           <style dangerouslySetInnerHTML={{ __html: this.props.css }} />
           {this.props.hydrationScript}
           <style
             dangerouslySetInnerHTML={{
-              __html: `body{background:#fcfdfe;font-family:"SF UI Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";}`
+              __html: `pre{overflow-x:auto;}body{margin:0;background:#fcfdfe;font-family:"SF UI Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";}`
             }}
           />
         </Head>

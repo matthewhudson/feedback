@@ -1,14 +1,13 @@
 import React from 'react'
+import { addToAirtable } from '../utils'
 import {
   Pane,
-  Heading,
   Text,
   Label,
   Button,
-  TextInput,
-  CheckCircleIcon,
   Select,
-  Textarea
+  Textarea,
+  TextInput
 } from 'evergreen-ui'
 
 const SmallText = props => (
@@ -34,7 +33,7 @@ export class AirtableForm extends React.Component {
         label: 'Name (optional)'
       },
       {
-        key: 'workEmail',
+        key: 'notes',
         type: 'textarea',
         label: 'Feedback',
         required: true
@@ -158,7 +157,7 @@ export class AirtableForm extends React.Component {
     if (!props.form) {
       return {
         name: '',
-        workEmail: ''
+        notes: ''
       }
     }
 
@@ -170,14 +169,14 @@ export class AirtableForm extends React.Component {
 
   onSubmit = ({ baseId, table, state }) => {
     if (!baseId) {
-      // throw new Error('Missing `baseId` prop for `AirtableForm`')
+      throw new Error('Missing `baseId` prop for `AirtableForm`')
     }
 
-    const body = { ...state }
+    const data = { ...state }
 
-    delete body.didSubmit
+    delete data.didSubmit
 
-    // addToAirtable({ baseId, table, body })
+    addToAirtable({ baseId, table, data })
   }
 }
 

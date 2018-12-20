@@ -11,10 +11,12 @@
     "@mapbox/rehype-prism": "^0.3.0",
     "@mdx-js/mdx": "0.16.5",
     "@zeit/next-mdx": "1.2.0",
+    "axios": "^0.18.0",
     "evergreen-ui": "^4.8.0",
     "next": "^7.0.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-responsive": "^6.0.1",
     "remark-parse": "^6.0.3",
     "remark-rehype": "^4.0.0"
   },
