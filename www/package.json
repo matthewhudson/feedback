@@ -1,0 +1,23 @@
+{
+  "name": "with-mdx",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next",
+    "start": "next start",
+    "build": "next build",
+    "now-build": "next build && next export -o dist"
+  },
+  "dependencies": {
+    "@mapbox/rehype-prism": "^0.3.0",
+    "@mdx-js/mdx": "0.16.5",
+    "@zeit/next-mdx": "1.2.0",
+    "evergreen-ui": "^4.8.0",
+    "next": "^7.0.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "remark-parse": "^6.0.3",
+    "remark-rehype": "^4.0.0"
+  },
+  "devDependencies": {},
+  "license": "ISC"
+}

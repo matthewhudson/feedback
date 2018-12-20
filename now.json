@@ -1,0 +1,7 @@
+{
+  "name": "@um/feedback",
+  "alias": ["feedback.usermirror.com"],
+  "version": 2,
+  "routes": [{ "src": "/(.*)", "dest": "www/$1" }],
+  "builds": [{ "src": "www/package.json", "use": "@now/static-build" }]
+}

@@ -1,0 +1,68 @@
+# KMS APIs
+
+Here's currently what we're thinking for Key Management interface:
+
+```go
+// KMS is the Key Management Service interface
+type KMS interface {
+	Encrypt(string) (string, error)
+	Decrypt(string) (string, error)
+}
+
+// Envelope can contain both encrypted and unencrypted
+// data and the operations to be performed on it.
+type Envelope struct {
+	// Data contains information that can be encrypted or decrypted.
+	Data map[string]string `json:"data"`
+
+	// Operations that are applied (in order) to the envelope's Data.
+	Operations []Operation `json:"ops"`
+}
+```
+
+An **operation** is applied to **data** that's passed into the envelope.
+This can be executed on a Cloud KMS or just use the Cloud KMS for key
+generation and retrieval. Here's an example:
+
+```go
+func TestEnvelope_Expand(t *testing.T) {
+	data := map[string]string{
+		"email":    "something@example.com",
+		"password": "doorknob",
+		"dob":      "11/07/1598",
+	}
+	plainPrefix := "decrypted"
+
+	env := &Envelope{
+		Data: copyMap(data),
+		Operations: []Operation{
+			{
+				DataLocation: DataLocation{
+					Source:      AllFields,
+					Destination: plainPrefix,
+				},
+				Encrypt: &Encrypt{},
+			},
+		},
+	}
+
+	env.Expand()
+
+	if len(env.Operations) != len(data) {
+		t.Errorf("there is should be as many Operations (%d) as data (%d)", len(env.Operations), len(data))
+	}
+
+	for _, op := range env.Operations {
+		// check source
+		if _, ok := data[op.Source]; !ok {
+			t.Errorf("source (%s) should be within data (%+v)", op.Source, data)
+		}
+
+		// check destination
+		expectedDst := plainPrefix + op.Source
+		if op.Destination != expectedDst {
+			t.Errorf("destination should be '%s' not '%s'", expectedDst, op.Destination)
+		}
+	}
+}
+```
