@@ -31,15 +31,13 @@ export class AirtableForm extends React.Component {
     const form = propsForm || [
       {
         key: 'name',
-        label: 'Name (optional)',
-        placeholder: 'Rosie'
+        label: 'Name (optional)'
       },
       {
         key: 'workEmail',
         type: 'textarea',
         label: 'Feedback',
-        required: true,
-        placeholder: ''
+        required: true
       }
     ]
 
